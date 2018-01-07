@@ -3,6 +3,7 @@ package guru.springframework.receipe.domain;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * This is the entity class for Recipe
@@ -24,6 +25,9 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     // to do
     //private Difficulty difficulty;
@@ -109,5 +113,13 @@ public class Recipe {
 
     public void setImage(Byte[] image) {
         this.image = image;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
