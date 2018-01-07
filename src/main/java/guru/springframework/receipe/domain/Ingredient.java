@@ -7,6 +7,7 @@ import java.math.BigDecimal;
  * This is the entity class for Ingredient
  * @author PALLAB
  */
+@Entity
 public class Ingredient {
 
     @Id
