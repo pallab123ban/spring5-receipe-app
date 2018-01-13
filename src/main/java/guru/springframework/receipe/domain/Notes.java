@@ -14,7 +14,7 @@ public class Notes {
     private long id;
 
     @Lob
-    private String notes;
+    private String RecipeNotes;
 
     @OneToOne
     private Recipe recipe;
@@ -27,12 +27,12 @@ public class Notes {
         this.id = id;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getRecipeNotes() {
+        return RecipeNotes;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setRecipeNotes(String recipeNotes) {
+        RecipeNotes = recipeNotes;
     }
 
     public Recipe getRecipe() {
