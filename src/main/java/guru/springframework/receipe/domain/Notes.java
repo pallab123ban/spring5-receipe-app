@@ -1,11 +1,16 @@
 package guru.springframework.receipe.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 
 /**
  * This is the entity class for Notes
  * @author PALLAB
  */
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 
@@ -19,27 +24,4 @@ public class Notes {
     @OneToOne
     private Recipe recipe;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getRecipeNotes() {
-        return RecipeNotes;
-    }
-
-    public void setRecipeNotes(String recipeNotes) {
-        RecipeNotes = recipeNotes;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 }

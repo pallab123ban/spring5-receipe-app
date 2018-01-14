@@ -4,6 +4,7 @@ import guru.springframework.receipe.domain.*;
 import guru.springframework.receipe.repositories.CategoryRepository;
 import guru.springframework.receipe.repositories.RecipeRepository;
 import guru.springframework.receipe.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import java.util.Optional;
  * @author PALLAB
  */
 @Component
+@Slf4j
 public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CategoryRepository categoryRepository;
@@ -32,13 +34,14 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("I am in the RecipeBootstrap class loading the bootstrap:");
     }
 
     private List<Recipe> getRecipes() {
 
         List<Recipe> recipes = new ArrayList<>(2);
 
-        //get UOMs
+        //get UOM
         Optional<UnitOfMeasure> eachUomOptional = unitOfMeasureRepository.findByDescription("Each");
 
         if(!eachUomOptional.isPresent()){
