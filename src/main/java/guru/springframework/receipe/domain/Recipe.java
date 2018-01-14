@@ -11,7 +11,6 @@ import java.util.Set;
  * @author PALLAB
  */
 @Data
-@EqualsAndHashCode(exclude = {"notes"})
 @Entity
 public class Recipe {
 
