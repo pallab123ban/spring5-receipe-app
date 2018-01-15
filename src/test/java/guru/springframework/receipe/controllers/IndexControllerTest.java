@@ -11,6 +11,7 @@ import guru.springframework.receipe.domain.Recipe;
 import guru.springframework.receipe.services.RecipeService;
 import java.util.HashSet;
 import java.util.Set;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -46,12 +47,29 @@ public class IndexControllerTest {
 
   @Test
   public void testGetIndexPage() throws Exception {
+
+    //given
     recipe = new Recipe();
+    recipe.setId(3l);
     recipeList = new HashSet<>();
     recipeList.add(recipe);
+    recipe = new Recipe();
+    recipe.setId(4l);
+    recipeList.add(recipe);
+
+    ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
+
+    //when
     when(mockRecipeService.getAllRecipe()).thenReturn(recipeList);
+
+    //then
     assertEquals(subject.getIndexPage(mockModel), INDEX);
     verify(mockRecipeService, times(1)).getAllRecipe();
-    verify(mockModel, times(1)).addAttribute(eq("recipes"), eq(recipeList));
+    //verify(mockModel, times(1)).addAttribute(eq("recipes"), eq(recipeList));
+    verify(mockModel, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
+
+    Set<Recipe> setInController = argumentCaptor.getValue();
+
+    assertEquals(2, setInController.size());
   }
 }
