@@ -1,7 +1,6 @@
 package guru.springframework.receipe.services;
 
 import guru.springframework.receipe.domain.Recipe;
-
 import java.util.Set;
 
 /**
@@ -9,5 +8,5 @@ import java.util.Set;
  */
 public interface RecipeService {
 
-    Set<Recipe> getAllRecipe();
+  Set<Recipe> getAllRecipe();
 }
