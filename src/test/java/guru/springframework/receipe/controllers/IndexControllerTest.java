@@ -1,5 +1,6 @@
 package guru.springframework.receipe.controllers;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -51,5 +52,6 @@ public class IndexControllerTest {
     when(mockRecipeService.getAllRecipe()).thenReturn(recipeList);
     assertEquals(subject.getIndexPage(mockModel), INDEX);
     verify(mockRecipeService, times(1)).getAllRecipe();
+    verify(mockModel, times(1)).addAttribute(eq("recipes"), eq(recipeList));
   }
 }
