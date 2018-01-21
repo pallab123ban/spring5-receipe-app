@@ -3,6 +3,7 @@ package guru.springframework.receipe.services;
 import guru.springframework.receipe.domain.Recipe;
 import guru.springframework.receipe.repositories.RecipeRepository;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +26,16 @@ public class RecipeServiceImpl implements RecipeService {
     recipeRepository.findAll().iterator().forEachRemaining(recipeList::add);
     return recipeList;
   }
+
+  @Override
+  public Recipe getRecipeById(Long l) {
+    log.debug("I'm inside getRecipeById method");
+    Optional<Recipe> recipeReturned = recipeRepository.findById(l);
+
+    if (!recipeReturned.isPresent()) {
+      throw new RuntimeException("Recipe is not found!!");
+    }
+    return recipeReturned.get();
+  }
+
 }
